@@ -1,0 +1,60 @@
+[
+    {
+       "Email":"kenneth@gmail.com",
+       "Password":"329129293",
+       "Name": "Kenneth",
+       "Age": 28,
+       "Gender": "Female",
+       "Data": 
+       [
+            {   
+                "Date": "19.05.2021", 
+                "Symptoms": 
+                {
+                    "fever": 36.8,
+                    "coughing": 1, 
+                    "headache": 0,
+                    "dizziness": false,
+                    "taste-loss": false,
+                    "breathe-difficulty": false,
+                    "chest-pain": false,
+                    "quick-tiring": false
+                }
+            },
+            {   
+                "Date": "20.05.2021", 
+                "Symptoms": 
+                {
+                    "fever": 37.2,
+                    "coughing": 2, 
+                    "headache": 1,
+                    "dizziness": false,
+                    "taste-loss": false,
+                    "breathe-difficulty": false,
+                    "chest-pain": false,
+                    "quick-tiring": true
+                }
+            }
+       ]
+    },
+    {
+       "Email":"john@gmail.com",
+       "Phone":"5551111111",
+       "Password":"1234"
+    },
+    {
+       "Email":"mary@gmail.com",
+       "Phone":"5552222222",
+       "Password":"123123123"
+    },
+    {
+       "Email":"mehmet@gmail.com",
+       "Phone":"5550000001",
+       "Password":"asdush"
+    },
+    {
+       "Email":"burak@gmail.com",
+       "Phone":"",
+       "Password":"866472"
+    }
+ ]
