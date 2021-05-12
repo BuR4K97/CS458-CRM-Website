@@ -1,4 +1,5 @@
 import models.User;
+import models.UserResult;
 
 import java.io.IOException;
 
@@ -16,28 +17,30 @@ public class Tools
     private static final String REGISTER_SYMPTOMS_ROUTE = "/registerDailySymptoms";
     private static final String CHECK_CONDITION_ROUTE = "/checkCondition";
 
-    public static boolean login(User user) 
+    public static UserResult login(User user) 
     {
         try 
         {
             HTTPConnection connection = new HTTPConnection(SERVER_URL + SIGNIN_ROUTE);
             String result = connection.sendRequest(JSONHandler.generateJSON(user));
-            return JSONHandler.extractResult(result);
+            System.out.println(result);
+            return JSONHandler.extractUserResult(result);
         } 
         catch (IOException exception) 
         {
             exception.printStackTrace();
         }
-        return false;
+        return null;
     }
 
-    public static JSONObject signup(User user)
+    public static UserResult signup(User user)
     {
         try 
         {
             HTTPConnection connection = new HTTPConnection(SERVER_URL + SIGNUP_ROUTE);
             String result = connection.sendRequest(JSONHandler.generateJSON(user));
-            return JSONHandler.parse(result);
+            System.out.println(result);
+            return JSONHandler.extractUserResult(result);
         } 
         catch (IOException exception) 
         {

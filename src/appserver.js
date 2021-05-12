@@ -62,6 +62,15 @@ app.post('/login', function (req, res)
 //Signup POST
 app.post('/signup', function (req, res)
 {
+    const GENDER =
+    {
+        MALE: 0,
+        FEMALE: 1
+    }
+
+    if(req.body.gender === 'Male') req.body.gender = GENDER.MALE;
+    else req.body.gender = GENDER.FEMALE;
+    
     var options = tools.signup(req.body);
     if(options.user) 
     {

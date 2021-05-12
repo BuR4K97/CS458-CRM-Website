@@ -27,7 +27,7 @@ module.exports =
 
     signup: function (user) 
     {
-        let result = checkUserData(email, null);
+        let result = checkUserData(user.email, null);
 
         if(result.status === UserMatchStatus.INVALID_USER) 
         {
@@ -51,25 +51,26 @@ module.exports =
         return "CONDITION";
     }
 };
-    const UserMatchStatus = 
-    {
-        INVALID_USER : 0,
-        INVALID_PASSWORD : 1,
-        MATCH_SUCCESS : 2
-    };
 
-    function checkUserData(email, password)
+const UserMatchStatus = 
+{
+    INVALID_USER : 0,
+    INVALID_PASSWORD : 1,
+    MATCH_SUCCESS : 2
+};
+
+function checkUserData(email, password)
+{
+    for(var i = 0; i < users.length; i++)
     {
-        for(var i = 0; i < users.length; i++)
+        if(users[i].email === email)
         {
-            if(users[i].email === email)
+            if(users[i].password === password)
             {
-                if(users[i].password === password)
-                {
-                    return { user: users[i], status: UserMatchStatus.MATCH_SUCCESS };
-                }
-                return { user: null, status: UserMatchStatus.INVALID_PASSWORD };
+                return { user: users[i], status: UserMatchStatus.MATCH_SUCCESS };
             }
+            return { user: null, status: UserMatchStatus.INVALID_PASSWORD };
         }
-        return { user: null, status: UserMatchStatus.INVALID_USER };
     }
+    return { user: null, status: UserMatchStatus.INVALID_USER };
+}
