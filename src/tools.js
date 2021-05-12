@@ -74,25 +74,35 @@ module.exports =
             fs.writeFile(users_file, JSON.stringify(users), (err) => { if(err) throw err; });
             return { user: user, result: true };
         }
-        else return { user: null, result: false, message: "Invalid email" };
+        else return { user: null, result: false, message: "Invalid user" };
     },
 
     checkCondition: function (user) 
     {
         const condition = Object.freeze({"HEALTHY":0, "IN_RISK":1, "EARLY_COVID":2, "SEVERE":3}); //Condition enum
-        let lastRecord = user.data[user.data.length - 1].symptoms;
-        if(lastRecord["chestPain"] || lastRecord["breatheDifficulty"]){
-            return condition.SEVERE;
+        let result = retrieveUserData(user.email);
+        if(result.status === UserMatchStatus.MATCH_SUCCESS) 
+        {
+            let data = result.user.data;
+            let lastRecord = data[data.length - 1].symptoms;
+            if(lastRecord["chestPain"] || lastRecord["breatheDifficulty"])
+            {
+                return { condition: condition.SEVERE } ;
+            }
+            else if(lastRecord.dizziness || lastRecord["tasteLoss"] || lastRecord.headache >= 1)
+            {
+                return { condition: condition.EARLY_COVID };
+            }
+            else if(lastRecord.fever > 37.5 || lastRecord.coughing >= 1 || lastRecord["quickTiring"])
+            {
+                return { condition: condition.IN_RISK };
+            }
+            else
+            {
+                return { condition: condition.HEALTHY };
+            }
         }
-        else if(lastRecord.dizziness || lastRecord["tasteLoss"] || lastRecord.headache >= 1){
-            return condition.EARLY_COVID;
-        }
-        else if(lastRecord.fever > 37.5 || lastRecord.coughing >= 1 || lastRecord["quickTiring"]){
-            return condition.IN_RISK;
-        }
-        else{
-            return condition.HEALTHY;
-        }
+        else return { condition: -1, message: "Invalid user"};
     }
 };
 

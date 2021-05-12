@@ -39,7 +39,7 @@ app.get('/home', function (req, res)
     if(req.session.user == null) res.redirect('login');
     else 
     {
-        let condition = tools.checkCondition(req.session.user);
+        let condition = tools.checkCondition(req.session.user).condition;
         res.render('home', { user: req.session.user, condition: condition });
     }
 });
@@ -114,7 +114,7 @@ app.post('/home', function (req, res)
         quickTiring: quickTiring,
     }});
     req.session.user = options.user;
-    let condition = tools.checkCondition(req.session.user);
+    let condition = tools.checkCondition(req.session.user).condition;
     res.render('home', { user: req.session.user, condition: condition });
 });
 
