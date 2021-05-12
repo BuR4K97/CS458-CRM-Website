@@ -48,6 +48,6 @@ public class TestLogin {
         UserResult result = Tools.login(user);
 
         assertNull(result.getUser());
-        assertEquals("There is no such account. Please try signing up.", result.getMessage());
+        assertEquals("There is no such account. Please try signup.", result.getMessage());
     }
 }
