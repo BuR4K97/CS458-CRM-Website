@@ -2,11 +2,11 @@ package models;
 
 public class User 
 {
-    public String email;
-    public String password;
-    public String name;
-    public int age;
-    public Gender gender;
+    private String email;
+    private String password;
+    private String name;
+    private int age;
+    private Gender gender;
 
     public User(String email, String password, String name, int age, Gender gender)
     {

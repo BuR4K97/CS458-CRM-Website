@@ -12,7 +12,7 @@ module.exports =
         var options;
         if(result.status === UserMatchStatus.MATCH_SUCCESS) 
         {
-            options = { user: result.user };
+            options = { user: result.user, message:"Successful Login" };
         }
         else if(result.status === UserMatchStatus.INVALID_PASSWORD) 
         {
@@ -63,7 +63,7 @@ module.exports =
             {
                 user.data.push({ date: dailySymptoms.date, symptoms: dailySymptoms.symptoms });
             }
-            user.data.sort((prev, next) => 
+            user.data.sort((prev, next) =>
             {
                 let prevDate = Date.parse(prev.date);
                 let nextDate = Date.parse(next.date);
@@ -72,7 +72,7 @@ module.exports =
                 return 0;
             });
             fs.writeFile(users_file, JSON.stringify(users), (err) => { if(err) throw err; });
-            return { user: user, result: true };
+            return { user: user, result: true, message:"Success" };
         }
         else return { user: null, result: false, message: "Invalid user" };
     },
