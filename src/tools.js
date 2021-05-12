@@ -85,6 +85,7 @@ module.exports =
         {
             let data = result.user.data;
             let lastRecord = data[data.length - 1].symptoms;
+            if(data.length < 1) return condition.HEALTHY;
             if(lastRecord["chestPain"] || lastRecord["breatheDifficulty"])
             {
                 return { condition: condition.SEVERE } ;
