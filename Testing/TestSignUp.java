@@ -4,19 +4,22 @@ import org.junit.*;
 
 import static org.junit.Assert.*;
 
-public class TestSignUp {
+public class TestSignUp 
+{
     private User user;
     //private DailySymptoms symptoms;
 
     @Before
-    public void init(){
+    public void init()
+    {
         user = new User("burak@gmail.com", null, "123456", "Burak Mutlu", 23, Gender.MALE);
         //symptoms = new DailySymptoms(burak, LocalDate.now(), new Symptoms(36.5f, Coughing.LOW, Headache.NONE,
         //                false, false, false, false, false));
     }
 
     @Test
-    public void validSignUp(){
+    public void validSignUp()
+    {
         JSONObject json = Tools.signup(user);
         assertTrue(json.containsKey("email"));
         assertEquals(user.getEmail(), json.get("email"));

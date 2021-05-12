@@ -5,89 +5,71 @@ const users = JSON.parse(fs.readFileSync(users_file));
 
 module.exports = 
 {
-    signin: function (email, password) {
-        var result;
-        if(emailOrPhone(email))
-            result = checkUserData(email, null, password);
-        else
-          result = checkUserData(null, email, password);
+    login: function (user) 
+    {
+        let result = checkUserData(user.email, user.password);
 
         var options;
-        if(result.status === UserMatchStatus.MATCH_SUCCESS) {
-            options = { email: result.email, phone: result.phone };
+        if(result.status === UserMatchStatus.MATCH_SUCCESS) 
+        {
+            options = { user: result.user };
         }
-        else if(result.status === UserMatchStatus.INVALID_PASSWORD) {
-            options = { alert: true, message: "Wrong password. Please try again or reset your password."};
+        else if(result.status === UserMatchStatus.INVALID_PASSWORD) 
+        {
+            options = { user: null, message: "Wrong password. Please try again or reset your password."};
         }
-        else if(result.status === UserMatchStatus.INVALID_USER) {
-            options = { alert: true, message: "There is no such account. Please try signing up."};
+        else if(result.status === UserMatchStatus.INVALID_USER) 
+        {
+            options = { user: null, message: "There is no such account. Please try signup."};
         }
         return options;
     },
 
-    signup: function (email, phone, password, name, age, gender) {
-        var result;
-        let user = { Email: email, Password: password, Name: name, Age: age, Gender: gender};
-        if(phone === undefined || phone === null || phone.length === 0)
-            result = checkUserData(email, null, null);
-        else {
-            result = checkUserData(email, phone, null);
-            user.Phone = phone;
-        }
+    signup: function (user) 
+    {
+        let result = checkUserData(email, null);
 
-        if(result.status === UserMatchStatus.INVALID_USER) {
+        if(result.status === UserMatchStatus.INVALID_USER) 
+        {
             users.push(user);
             fs.writeFile(users_file, JSON.stringify(users), (err) =>
             {
                 if(err) throw err;
             });
-            return { email: user.Email, phone: user.Phone };
+            return { user: user };
         }
-        else if(result.email != null)
-            return { alert: true, message: "This e-mail is already registered. Please try signing in."};
-        else
-            return { alert: true, message: "This phone number is already registered. Please try signing in."};
+        else return { user: null, message: "This e-mail is already registered. Please try login."};
     },
 
-    registerSymptoms: function (email, symptoms, date) {
+    registerDailySymptoms: function (dailySymptoms) 
+    {
         return false;
     },
 
-    checkCondition: function (email) {
+    checkCondition: function (user) 
+    {
         return "CONDITION";
     }
 };
-    const UserMatchStatus = {
+    const UserMatchStatus = 
+    {
         INVALID_USER : 0,
         INVALID_PASSWORD : 1,
         MATCH_SUCCESS : 2
     };
 
-    function checkUserData(email, phone, password)
+    function checkUserData(email, password)
     {
         for(var i = 0; i < users.length; i++)
         {
-            if(users[i].Email === email)
+            if(users[i].email === email)
             {
-                if(users[i].Password === password)
+                if(users[i].password === password)
                 {
-                    return { email: users[i].Email, phone: users[i].Phone, status: UserMatchStatus.MATCH_SUCCESS };
+                    return { user: users[i], status: UserMatchStatus.MATCH_SUCCESS };
                 }
-                return { email: users[i].Email, phone: null, status: UserMatchStatus.INVALID_PASSWORD };
-            }
-            if(users[i].Phone === phone)
-            {
-                if(users[i].Password === password)
-                {
-                    return { email: users[i].Email, phone: users[i].Phone, status: UserMatchStatus.MATCH_SUCCESS };
-                }
-                return { email: null, phone: users[i].Phone, status: UserMatchStatus.INVALID_PASSWORD };
+                return { user: null, status: UserMatchStatus.INVALID_PASSWORD };
             }
         }
-        return { email: null, phone: null, status: UserMatchStatus.INVALID_USER };
-    }
-
-    function emailOrPhone(input)
-    {
-        return /[^\d.+()]+/.test(input);
+        return { user: null, status: UserMatchStatus.INVALID_USER };
     }

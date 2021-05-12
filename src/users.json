@@ -1,15 +1,15 @@
 [
     {
-       "Email":"kenneth@gmail.com",
-       "Password":"329129293",
-       "Name": "Kenneth",
-       "Age": 28,
-       "Gender": "Female",
-       "Data": 
+       "email":"kenneth@gmail.com",
+       "password":"329129293",
+       "name": "Kenneth",
+       "age": 28,
+       "gender": "Female",
+       "data": 
        [
             {   
-                "Date": "19.05.2021", 
-                "Symptoms": 
+                "date": "19.05.2021", 
+                "symptoms": 
                 {
                     "fever": 36.8,
                     "coughing": 1, 
@@ -22,8 +22,8 @@
                 }
             },
             {   
-                "Date": "20.05.2021", 
-                "Symptoms": 
+                "date": "20.05.2021", 
+                "symptoms": 
                 {
                     "fever": 37.2,
                     "coughing": 2, 

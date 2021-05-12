@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Netflix</title>
+        <title>Covid Remote Monitoring System</title>
         <style>
             * {
               box-sizing: border-box;
@@ -45,18 +45,17 @@
         </style>
     </head>
     <body>
-        <h1><a href="/" id="homebutton">NETFLIX</a> </h1>
         <div class="column side"></div>
         <div class="column middle">
             <h2 style="color:white">Sign Up</h2>
             <form action="/signup" method="post" onsubmit="return checkSubmitError();">
                 <div id="signupError" style="color:#939393" class="signupError"><%if(locals.alert)%><%=locals.message%></div>
                 <div id="nameForm">
-                    <input id="name" name="name" class="text-input" type="text" placeholder="Name Surname" onfocusout="nameFocusOut()"/>
+                    <input id="name" name="name" class="text-input" type="text" placeholder="Full Name" onfocusout="nameFocusOut()"/>
                     <div id="nameError" style="color:#939393" class="inputError" hidden></div>
                 </div>
                 <div id="ageForm">
-                    <input id="age" name="age" class="text-input" type="number" placeholder="Age" onfocusout="ageFocusOut()"/>
+                    <input id="age" name="age" class="text-input" type="number" min="0" placeholder="Age" onfocusout="ageFocusOut()"/>
                     <div id="ageError" style="color:#939393" class="inputError" hidden></div>
                 </div>
                 <div id="genderForm" >
@@ -68,10 +67,6 @@
                 <div id="emailForm">
                     <input id="email" name="email" class="text-input" type="text" placeholder="E-mail" onfocusout="emailFocusOut()"/>
                     <div id="emailError" style="color:#939393" class="inputError" hidden></div>
-                </div>
-                <div id="phoneForm">
-                    <input id="phone" name="phone" class="text-input" type="tel" placeholder="Phone Number" onfocusout="phoneFocusOut()"/>
-                    <div id="phoneError" style="color:#939393" class="inputError" hidden></div>
                 </div>
                 <div id="passForm">
                     <input id="pass" name="password" class="text-input" type="password" placeholder="Password" onfocusout="passFocusOut()"/>
@@ -91,10 +86,6 @@
             return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(input);
         }
 
-        function checkValidPhone(input)
-        {
-            return /^\d{10}$/.test(input);
-        }
         function checkValidName(input)
         {
             return /^([a-zA-z]{2,})+\s+([a-zA-z\s]{2,})+$/i.test(input);
@@ -107,7 +98,7 @@
                 document.getElementById("nameError").innerText = "Please enter your name and surname";
                 return false;
             }
-            else if ( !checkValidName(document.getElementById("name").value.trim()) )
+            else if (!checkValidName(document.getElementById("name").value.trim()) )
             {
                 document.getElementById("nameError").innerText = "Please enter your name and surname";
                 return false;
@@ -121,7 +112,7 @@
 
         function checkAgeError()
         {
-            if( parseInt(document.getElementById("age").value) < 1 || parseInt(document.getElementById("age").value) > 150 )
+            if(parseInt(document.getElementById("age").value) < 1 || parseInt(document.getElementById("age").value) > 150 )
             {
                 document.getElementById("ageError").innerText = "Please enter your real age";
                 return false;
@@ -152,25 +143,6 @@
             }
         }
 
-        function checkPhoneError()
-        {
-            if (document.getElementById("phone").value.length < 5 || document.getElementById("phone").value.length > 50)
-            {
-                document.getElementById("phoneError").innerText = "Please enter a valid phone number.";
-                return false;
-            }
-            else if(!checkValidPhone(document.getElementById("phone").value))
-            {
-                document.getElementById("phoneError").innerText = "Please enter a valid phone number.";
-                return false;
-            }
-            else
-            {
-                document.getElementById("phoneError").innerText = "";
-                return true;
-            }
-        }
-
         function checkPassError()
         {
             if (document.getElementById("pass").value.length < 4 || document.getElementById("pass").value.length > 60)
@@ -187,8 +159,7 @@
 
         function checkSubmitError()
         {
-            if(document.getElementById("phone").value.length == 0) return checkEmailError() && checkPassError();
-            return checkEmailError() && checkPhoneError() && checkPassError();
+            return checkEmailError() && checkPassError() && checkAgeError() && checkNameError();
         }
 
         function nameFocusOut()
@@ -206,11 +177,6 @@
             if (!checkEmailError()) document.getElementById("emailError").hidden = false;
         }
 
-        function phoneFocusOut()
-        {
-            if (!checkPhoneError()) document.getElementById("phoneError").hidden = false;
-        }
-
         function passFocusOut()
         {
             if (!checkPassError()) document.getElementById("passError").hidden = false;
@@ -219,7 +185,6 @@
         document.getElementById("email").oninput = checkEmailError;
         document.getElementById("name").oninput = checkNameError;
         document.getElementById("age").oninput = checkAgeError;
-        document.getElementById("phone").oninput = checkPhoneError;
         document.getElementById("pass").oninput = checkPassError;
 
     </script>

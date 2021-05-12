@@ -14,30 +14,30 @@ const users_file = 'users.json';
 const users = JSON.parse(fs.readFileSync(users_file));
 
 //signin function testing route
-app.post('/test/signin', function (req, res)
+app.post('/login', function (req, res)
 {
-    let result = tools.signin(req.body.email, req.body.password);
+    let result = tools.login(req.body);
     res.send(result);
 });
 
 //signup function testing route
-app.post('/test/signup', function (req, res)
+app.post('/signup', function (req, res)
 {
-    let result = tools.signup(req.body.email, req.body.phone, req.body.password, req.body.name, req.body.age, req.body.gender);
+    let result = tools.signup(req.body);
     res.send(result);
 });
 
 //registerSymptoms function testing route
-app.post('/test/registerSymptoms', function (req, res)
+app.post('/registerDailySymptoms', function (req, res)
 {
-    let result = tools.registerSymptoms(req.email, req.symptoms, req.date);
+    let result = tools.registerDailySymptoms(req.body);
     res.send(result);
 });
 
 //checkCondition function testing route
-app.post('/test/checkCondition', function (req, res)
+app.post('/checkCondition', function (req, res)
 {
-    let condition = tools.checkCondition(req.email);
+    let condition = tools.checkCondition(req.body);
     res.send({condition: 0});
 });
 

@@ -11,12 +11,12 @@ import org.json.simple.JSONObject;
 public class Tools 
 {
     private static final String SERVER_URL = "http://localhost:3002";
-    private static final String SIGNIN_ROUTE = "/test/signin";
-    private static final String SIGNUP_ROUTE = "/test/signup"; 
-    private static final String REGISTER_SYMPTOMS_ROUTE = "/test/registerSymptoms";
-    private static final String CHECK_CONDITION_ROUTE = "/test/checkCondition";
+    private static final String SIGNIN_ROUTE = "/login";
+    private static final String SIGNUP_ROUTE = "/signup"; 
+    private static final String REGISTER_SYMPTOMS_ROUTE = "/registerDailySymptoms";
+    private static final String CHECK_CONDITION_ROUTE = "/checkCondition";
 
-    public static boolean signin(User user) 
+    public static boolean login(User user) 
     {
         try 
         {
@@ -46,7 +46,7 @@ public class Tools
         return null;
     }
 
-    public static boolean registerSymptoms(DailySymptoms dailySymptoms) 
+    public static boolean registerDailySymptoms(DailySymptoms dailySymptoms) 
     {
         try 
         {
