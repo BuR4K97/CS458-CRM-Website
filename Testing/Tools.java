@@ -6,6 +6,7 @@ import helper.HTTPConnection;
 import helper.JSONHandler;
 import models.Condition;
 import models.DailySymptoms;
+import org.json.simple.JSONObject;
 
 public class Tools 
 {
@@ -24,19 +25,19 @@ public class Tools
         return false;
     }
 
-    public static boolean signup(User user) 
+    public static JSONObject signup(User user)
     {
         try 
         {
             HTTPConnection connection = new HTTPConnection("http://localhost:3002/test/signup");
             String result = connection.sendRequest(JSONHandler.generateJSON(user));
-            return JSONHandler.extractResult(result);
+            return JSONHandler.parse(result);
         } 
         catch (IOException exception) 
         {
             exception.printStackTrace();
         }
-        return false;
+        return null;
     }
 
     public static boolean registerSymptoms(DailySymptoms dailySymptoms) 

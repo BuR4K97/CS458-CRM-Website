@@ -17,21 +17,21 @@ const users = JSON.parse(fs.readFileSync(users_file));
 app.post('/test/signin', function (req, res)
 {
     let result = tools.signin(req.body.email, req.body.password);
-    res.send({result: result});
+    res.send(result);
 });
 
 //signup function testing route
 app.post('/test/signup', function (req, res)
 {
     let result = tools.signup(req.body.email, req.body.phone, req.body.password, req.body.name, req.body.age, req.body.gender);
-    res.send({result: result});
+    res.send(result);
 });
 
 //registerSymptoms function testing route
 app.post('/test/registerSymptoms', function (req, res)
 {
     let result = tools.registerSymptoms(req.email, req.symptoms, req.date);
-    res.send({result: result});
+    res.send(result);
 });
 
 //checkCondition function testing route

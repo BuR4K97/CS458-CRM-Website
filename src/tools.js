@@ -28,7 +28,7 @@ module.exports =
     signup: function (email, phone, password, name, age, gender) {
         var result;
         let user = { Email: email, Password: password, Name: name, Age: age, Gender: gender};
-        if(phone.length === 0)
+        if(phone === undefined || phone === null || phone.length === 0)
             result = checkUserData(email, null, null);
         else {
             result = checkUserData(email, phone, null);

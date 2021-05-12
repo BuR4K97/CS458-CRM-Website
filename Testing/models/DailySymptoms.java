@@ -8,7 +8,13 @@ public class DailySymptoms
     public LocalDate date;
     public Symptoms symptoms;
 
-    public DailySymptoms setUser(User user) 
+    public DailySymptoms(User user, LocalDate date, Symptoms symptoms) {
+        this.user = user;
+        this.date = date;
+        this.symptoms = symptoms;
+    }
+
+    public DailySymptoms setUser(User user)
     {
         this.user = user;
         return this;

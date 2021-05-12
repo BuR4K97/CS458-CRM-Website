@@ -11,7 +11,18 @@ public class Symptoms
     public boolean chestPain;
     public boolean quickTiring;
 
-    public Symptoms setFever(float fever) 
+    public Symptoms(float fever, Coughing coughing, Headache headache, boolean dizziness, boolean tasteLoss, boolean breatheDifficulty, boolean chestPain, boolean quickTiring) {
+        this.fever = fever;
+        this.coughing = coughing;
+        this.headache = headache;
+        this.dizziness = dizziness;
+        this.tasteLoss = tasteLoss;
+        this.breatheDifficulty = breatheDifficulty;
+        this.chestPain = chestPain;
+        this.quickTiring = quickTiring;
+    }
+
+    public Symptoms setFever(float fever)
     {
         this.fever = fever;
         return this;

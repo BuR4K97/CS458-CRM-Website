@@ -15,11 +15,12 @@ public class JSONHandler
     public static String generateJSON(User user) 
     {
         JSONObject userJSON = new JSONObject();
-        userJSON.put("email", user.email);
-        userJSON.put("password", user.password);
-        userJSON.put("name", user.name);
-        userJSON.put("age", user.age);
-        userJSON.put("gender", user.gender.ordinal());
+        userJSON.put("email", user.getEmail());
+        userJSON.put("phone", user.getPhone());
+        userJSON.put("password", user.getPassword());
+        userJSON.put("name", user.getName());
+        userJSON.put("age", user.getAge());
+        userJSON.put("gender", user.getGender().ordinal());
         return userJSON.toJSONString();
     }
 
@@ -37,7 +38,7 @@ public class JSONHandler
         symptomsJSON.put("quick-tiring", symptoms.quickTiring);
 
         JSONObject dailySymptomsJSON = new JSONObject();
-        dailySymptomsJSON.put("email", dailySymptoms.user.email);
+        dailySymptomsJSON.put("email", dailySymptoms.user.getEmail());
         dailySymptomsJSON.put("date", dailySymptoms.date.toString());
         dailySymptomsJSON.put("symptoms", symptomsJSON);
         return dailySymptomsJSON.toJSONString();
@@ -45,18 +46,21 @@ public class JSONHandler
 
     public static boolean extractResult(String text) 
     {
-        JSONObject json = JSONHandler.parse(text);
-        return Boolean.parseBoolean(json.get("result").toString());
+        //JSONObject json = JSONHandler.parse(text);
+        //return Boolean.parseBoolean(json.get("result").toString());
+        return false;
     }
 
     public static Condition extractCondition(String text) 
     {
-        JSONObject json = JSONHandler.parse(text);
-        return Condition.values()[Integer.parseInt(json.get("condition").toString())];
+        //JSONObject json = JSONHandler.parse(text);
+        //return Condition.values()[Integer.parseInt(json.get("condition").toString())];
+        return null;
     }
 
     private static JSONParser parser = new JSONParser();
-    private static JSONObject parse(String text)
+
+    public static JSONObject parse(String text)
     {
         try
         {
