@@ -28,8 +28,8 @@ public class TestSignUp
     public void emailRegistered()
     {
         UserResult result = Tools.signup(user);
-        assertNull(result.user.email);
-        assertEquals("This e-mail is already registered. Please try signing in.", result.message);
+        assertNull(result.user);
+        assertEquals("This e-mail is already registered. Please try login.", result.message);
     }
 
 }

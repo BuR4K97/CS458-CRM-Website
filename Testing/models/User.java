@@ -2,13 +2,14 @@ package models;
 
 public class User 
 {
-    private String email;
-    private String password;
-    private String name;
-    private int age;
-    private Gender gender;
+    public String email;
+    public String password;
+    public String name;
+    public int age;
+    public Gender gender;
 
-    public User(String email, String password, String name, int age, Gender gender) {
+    public User(String email, String password, String name, int age, Gender gender)
+    {
         this.email = email;
         this.password = password;
         this.name = name;

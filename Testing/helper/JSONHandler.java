@@ -6,8 +6,10 @@ import org.json.simple.parser.ParseException;
 
 import models.Condition;
 import models.DailySymptoms;
+import models.Gender;
 import models.Symptoms;
 import models.User;
+import models.UserResult;
 
 public class JSONHandler 
 {
@@ -43,23 +45,36 @@ public class JSONHandler
         return dailySymptomsJSON.toJSONString();
     }
 
+    public static UserResult extractUserResult(String text) 
+    {
+        UserResult result = new UserResult();
+        JSONObject json = JSONHandler.parse(text);
+        JSONObject userJSON = (JSONObject) json.get("user");
+        
+        if(userJSON != null) result.setUser
+        (
+            new User().setEmail(userJSON.get("email").toString()).setPassword(userJSON.get("password").toString())
+                    .setName(userJSON.get("name").toString()).setAge(Integer.parseInt(userJSON.get("age").toString()))
+                    .setGender(Gender.values()[Integer.parseInt(userJSON.get("gender").toString())])
+        );
+        if(json.containsKey("message")) result.setMessage(json.get("message").toString());
+        return result;
+    }
+
     public static boolean extractResult(String text) 
     {
-        //JSONObject json = JSONHandler.parse(text);
-        //return Boolean.parseBoolean(json.get("result").toString());
-        return false;
+        JSONObject json = JSONHandler.parse(text);
+        return Boolean.parseBoolean(json.get("result").toString());
     }
 
     public static Condition extractCondition(String text) 
     {
-        //JSONObject json = JSONHandler.parse(text);
-        //return Condition.values()[Integer.parseInt(json.get("condition").toString())];
-        return null;
+        JSONObject json = JSONHandler.parse(text);
+        return Condition.values()[Integer.parseInt(json.get("condition").toString())];
     }
 
     private static JSONParser parser = new JSONParser();
-
-    public static JSONObject parse(String text)
+    private static JSONObject parse(String text)
     {
         try
         {
