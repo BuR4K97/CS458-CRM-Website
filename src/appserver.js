@@ -97,15 +97,11 @@ app.post('/home', function (req, res)
     if(req.body.coughing === "None") coughing = Coughing.NONE;
     if(req.body.coughing === "Mild") coughing = Coughing.MILD;
     if(req.body.coughing === "Severe") coughing = Coughing.SEVERE;
-    // if() dizziness = true; else dizziness = false;
     dizziness = req.body.hasOwnProperty("dizziness");
-    if(req.body.tasteLoss) tasteLoss = true; else tasteLoss = false;
-    if(req.body.breatheDifficulty) breatheDifficulty = true; else breatheDifficulty = false;
-    if(req.body.chestPain) chestPain = true; else chestPain = false;
-    if(req.body.quickTiring) quickTiring = true; else quickTiring = false;
-    console.log(req.body);
-    console.log(dizziness);
-    console.log(tasteLoss);
+    tasteLoss = req.body.hasOwnProperty("tasteLoss");
+    breatheDifficulty = req.body.hasOwnProperty("breatheDifficulty");
+    chestPain = req.body.hasOwnProperty("chestPain");
+    quickTiring = req.body.hasOwnProperty("quickTiring");
     let options = tools.registerDailySymptoms({ email: req.session.user.email, date: req.body.date, symptoms:
     {
         fever: req.body.fever,
@@ -117,6 +113,7 @@ app.post('/home', function (req, res)
         chestPain: chestPain,
         quickTiring: quickTiring,
     }});
+    req.session.user = options.user;
     let condition = tools.checkCondition(req.session.user);
     res.render('home', { user: req.session.user, condition: condition });
 });

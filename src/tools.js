@@ -63,10 +63,18 @@ module.exports =
             {
                 user.data.push({ date: dailySymptoms.date, symptoms: dailySymptoms.symptoms });
             }
+            user.data.sort((prev, next) => 
+            {
+                let prevDate = Date.parse(prev.date);
+                let nextDate = Date.parse(next.date);
+                if(prevDate < nextDate) return -1;
+                if(nextDate < prevDate) return 1;
+                return 0;
+            });
             fs.writeFile(users_file, JSON.stringify(users), (err) => { if(err) throw err; });
-            return { result: true };
+            return { user: user, result: true };
         }
-        else return { result: false, message: "Invalid email" };
+        else return { user: null, result: false, message: "Invalid email" };
     },
 
     checkCondition: function (user) 
