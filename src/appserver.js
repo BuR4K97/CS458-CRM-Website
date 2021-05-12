@@ -39,7 +39,8 @@ app.get('/home', function (req, res)
     if(req.session.user == null) res.redirect('login');
     else 
     {
-        res.render('home', { user: req.session.user });
+        let condition = tools.checkCondition(req.session.user);
+        res.render('home', { user: req.session.user, condition: condition });
     }
 });
 
@@ -81,6 +82,14 @@ app.post('/signup', function (req, res)
         res.redirect('home');
     }
     else res.render('signup', options);
+});
+
+//Home POST
+app.post('/home', function (req, res)
+{
+    console.log(req.body);
+    let condition = tools.checkCondition(req.session.user);
+    res.render('home', { user: req.session.user, condition: condition });
 });
 
 app.listen(port, () => 
