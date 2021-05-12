@@ -15,35 +15,38 @@ const port = 3000;
 //Index
 app.get('/', function (req, res)
 {
-    if(req.session.email) res.redirect('home');
+    if(req.session.user) res.redirect('home');
     else res.redirect('login');
 });
 
 //Login
 app.get('/login', function (req, res)
 {
-    if(req.session.email) res.redirect('home');
+    if(req.session.user) res.redirect('home');
     else res.render('login');
 });
 
 //Signup
 app.get('/signup', function (req, res)
 {
-    if(req.session.email) res.redirect('home');
+    if(req.session.user) res.redirect('home');
     else res.render('signup');
 });
 
 //Home
 app.get('/home', function (req, res)
 {
-    if(req.session.email == null) res.redirect('login');
-    else res.render('home');
+    if(req.session.user == null) res.redirect('login');
+    else 
+    {
+        res.render('home', { user: req.session.user });
+    }
 });
 
 //Logout
 app.get('/logout', function (req, res)
 {
-    req.session.email = null;
+    req.session.user = null;
     res.redirect('login');
 });
 
@@ -53,7 +56,7 @@ app.post('/login', function (req, res)
     var options = tools.login(req.body);
     if(options.user) 
     {
-        req.session.email = options.user.email;
+        req.session.user = options.user;
         res.redirect('home');
     }
     else res.render('login', options);
@@ -70,11 +73,11 @@ app.post('/signup', function (req, res)
 
     if(req.body.gender === 'Male') req.body.gender = GENDER.MALE;
     else req.body.gender = GENDER.FEMALE;
-    
+
     var options = tools.signup(req.body);
     if(options.user) 
     {
-        req.session.email = options.user.email;
+        req.session.user = options.user;
         res.redirect('home');
     }
     else res.render('signup', options);

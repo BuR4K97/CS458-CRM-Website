@@ -7,7 +7,6 @@ import helper.HTTPConnection;
 import helper.JSONHandler;
 import models.Condition;
 import models.DailySymptoms;
-import org.json.simple.JSONObject;
 
 public class Tools 
 {
