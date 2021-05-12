@@ -69,10 +69,6 @@
                     <input id="email" name="email" class="text-input" type="text" placeholder="E-mail" onfocusout="emailFocusOut()"/>
                     <div id="emailError" style="color:#939393" class="inputError" hidden></div>
                 </div>
-                <div id="phoneForm">
-                    <input id="phone" name="phone" class="text-input" type="tel" placeholder="Phone Number" onfocusout="phoneFocusOut()"/>
-                    <div id="phoneError" style="color:#939393" class="inputError" hidden></div>
-                </div>
                 <div id="passForm">
                     <input id="pass" name="password" class="text-input" type="password" placeholder="Password" onfocusout="passFocusOut()"/>
                     <div id="passError" style="color:#939393" class="inputError" hidden ></div>
@@ -91,10 +87,6 @@
             return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(input);
         }
 
-        function checkValidPhone(input)
-        {
-            return /^\d{10}$/.test(input);
-        }
         function checkValidName(input)
         {
             return /^([a-zA-z]{2,})+\s+([a-zA-z\s]{2,})+$/i.test(input);
@@ -152,25 +144,6 @@
             }
         }
 
-        function checkPhoneError()
-        {
-            if (document.getElementById("phone").value.length < 5 || document.getElementById("phone").value.length > 50)
-            {
-                document.getElementById("phoneError").innerText = "Please enter a valid phone number.";
-                return false;
-            }
-            else if(!checkValidPhone(document.getElementById("phone").value))
-            {
-                document.getElementById("phoneError").innerText = "Please enter a valid phone number.";
-                return false;
-            }
-            else
-            {
-                document.getElementById("phoneError").innerText = "";
-                return true;
-            }
-        }
-
         function checkPassError()
         {
             if (document.getElementById("pass").value.length < 4 || document.getElementById("pass").value.length > 60)
@@ -187,8 +160,7 @@
 
         function checkSubmitError()
         {
-            if(document.getElementById("phone").value.length == 0) return checkEmailError() && checkPassError();
-            return checkEmailError() && checkPhoneError() && checkPassError();
+            return checkEmailError() && checkPassError();
         }
 
         function nameFocusOut()
@@ -206,11 +178,6 @@
             if (!checkEmailError()) document.getElementById("emailError").hidden = false;
         }
 
-        function phoneFocusOut()
-        {
-            if (!checkPhoneError()) document.getElementById("phoneError").hidden = false;
-        }
-
         function passFocusOut()
         {
             if (!checkPassError()) document.getElementById("passError").hidden = false;
@@ -219,7 +186,6 @@
         document.getElementById("email").oninput = checkEmailError;
         document.getElementById("name").oninput = checkNameError;
         document.getElementById("age").oninput = checkAgeError;
-        document.getElementById("phone").oninput = checkPhoneError;
         document.getElementById("pass").oninput = checkPassError;
 
     </script>
