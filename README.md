@@ -11,7 +11,10 @@ npm insatll ejs
 
 Add java library files to the project path that are included in the "dependencies" folder.
 
-Run testserver api by using command:
+Run web application by using command:
+node appserver.js
+
+Run test api server by using command:
 node testserver.js
 
 Then run the junit tests that are written in java.
