@@ -19,7 +19,6 @@ public class Tools
         {
             HTTPConnection connection = new HTTPConnection(SERVER_URL + SIGNIN_ROUTE);
             String result = connection.sendRequest(JSONHandler.generateJSON(user));
-            System.out.println(result);
             return JSONHandler.extractUserResult(result);
         } 
         catch (IOException exception) 

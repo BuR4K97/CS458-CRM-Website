@@ -29,6 +29,6 @@ public class TestSubmitSymptoms {
                 false, false, false, false, false));
         Result result = Tools.registerDailySymptoms(symptoms);
         assertFalse(result.getResult());
-        assertEquals("Invalid email", result.getMessage());
+        assertEquals("Invalid user", result.getMessage());
     }
 }
