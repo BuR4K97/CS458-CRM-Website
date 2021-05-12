@@ -16,6 +16,8 @@ public class User
         this.gender = gender;
     }
 
+    public User() { }
+
     public User setEmail(String email)
     {
         this.email = email;
