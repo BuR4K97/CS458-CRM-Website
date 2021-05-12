@@ -33,8 +33,8 @@ app.post('/test/registerSymptoms', function (req, res)
 //checkCondition function testing route
 app.post('/test/checkCondition', function (req, res)
 {
-    let result = tools.signin(req.email);
-    res.send({result: result});
+    let condition = tools.checkCondition(req.email);
+    res.send({condition: 0});
 });
 
 app.listen(port, () => 
