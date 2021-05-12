@@ -10,11 +10,17 @@ import org.json.simple.JSONObject;
 
 public class Tools 
 {
+    private static final String SERVER_URL = "http://localhost:3002";
+    private static final String SIGNIN_ROUTE = "/test/signin";
+    private static final String SIGNUP_ROUTE = "/test/signup"; 
+    private static final String REGISTER_SYMPTOMS_ROUTE = "/test/registerSymptoms";
+    private static final String CHECK_CONDITION_ROUTE = "/test/checkCondition";
+
     public static boolean signin(User user) 
     {
         try 
         {
-            HTTPConnection connection = new HTTPConnection("http://localhost:3002/test/signin");
+            HTTPConnection connection = new HTTPConnection(SERVER_URL + SIGNIN_ROUTE);
             String result = connection.sendRequest(JSONHandler.generateJSON(user));
             return JSONHandler.extractResult(result);
         } 
@@ -29,7 +35,7 @@ public class Tools
     {
         try 
         {
-            HTTPConnection connection = new HTTPConnection("http://localhost:3002/test/signup");
+            HTTPConnection connection = new HTTPConnection(SERVER_URL + SIGNUP_ROUTE);
             String result = connection.sendRequest(JSONHandler.generateJSON(user));
             return JSONHandler.parse(result);
         } 
@@ -44,7 +50,7 @@ public class Tools
     {
         try 
         {
-            HTTPConnection connection = new HTTPConnection("http://localhost:3002/test/registerSymptoms");
+            HTTPConnection connection = new HTTPConnection(SERVER_URL + REGISTER_SYMPTOMS_ROUTE);
             String result = connection.sendRequest(JSONHandler.generateJSON(dailySymptoms));
             return JSONHandler.extractResult(result);
         } 
@@ -59,7 +65,7 @@ public class Tools
     {
         try 
         {
-            HTTPConnection connection = new HTTPConnection("http://localhost:3002/test/checkCondition");
+            HTTPConnection connection = new HTTPConnection(SERVER_URL + CHECK_CONDITION_ROUTE);
             String result = connection.sendRequest(JSONHandler.generateJSON(user));
             return JSONHandler.extractCondition(result);
         } 
