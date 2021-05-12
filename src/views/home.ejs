@@ -8,7 +8,7 @@
     <body>
         <div class="row mb-5">
             <div class="col-md-9 offset-md-3">
-                <h2>Welcome <%=email%></h2>
+                <h2>Welcome <%=user.email%></h2>
             </div>
         </div>
         <div class="row mb-5">
@@ -26,16 +26,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <% for(i = 0; i < data.length; i++) { %>
+                    <% for(i = 0; i < user.data.length; i++) { %>
                         <h2></h2>
                         <tr>
-                            <th scope="row"><%= data[i].Date %></th>
+                            <th scope="row"><%= user.data[i].date %></th>
                             <td>
-                            <% for(let key in data[i].Symptoms) { %>
-                                <%= key === "fever" ? key + ": " + data[i].Symptoms[key] + ", " : ""%>
-                                <%= data[i].Symptoms[key] === 1 ? key + ": Mild, " : ""%>
-                                <%= data[i].Symptoms[key] === 2 ? key + ": Severe, " : ""%>
-                                <%= data[i].Symptoms[key] === true ? key + ", " : ""%>
+                            <% for(let key in user.data[i].symptoms) { %>
+                                <%= key === "fever" ? key + ": " + user.data[i].symptoms[key] + ", " : ""%>
+                                <%= user.data[i].symptoms[key] === 1 ? key + ": Mild, " : ""%>
+                                <%= user.data[i].symptoms[key] === 2 ? key + ": Severe, " : ""%>
+                                <%= user.data[i].symptoms[key] === true ? key + ", " : ""%>
                             <% } %>
                             </td>
                         </tr>
@@ -56,8 +56,6 @@
                 <div class="col-md-6 offset-md-3">
                     <h3>Submit Daily Symptoms</h3>
                     <form action="/home" method="post" onsubmit="return checkSubmitError();">
-                        <div id="signupError" style="color:#939393" class="signupError"><%if(locals.alert)%><%=locals.message%></div>
-
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="dizziness">
                             <label class="form-check-label" for="flexCheckDefault">
@@ -90,7 +88,7 @@
                         </div>
 
                         <label for="fever">Fever: </label>
-                        <input id="fever" name="fever"type="number" placeholder="° Celcius"/>
+                        <input id="fever" name="fever"type="number" placeholder="° Celcius" required/>
 
                         <div id="headache">
                             <h5>Headache</h5>
@@ -136,7 +134,7 @@
                         </div>
 
                         <label class="mt-2" for="date">Date:</label>
-                        <input type="date" id="date" name="date" class="mb-3">
+                        <input type="date" id="date" name="date" class="mb-3" required>
                         <br>
                         <input type="submit" class="button" value="Submit Data">
                     </form>
