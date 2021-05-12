@@ -97,12 +97,16 @@ app.post('/home', function (req, res)
     if(req.body.coughing === "None") coughing = Coughing.NONE;
     if(req.body.coughing === "Mild") coughing = Coughing.MILD;
     if(req.body.coughing === "Severe") coughing = Coughing.SEVERE;
-    if(req.body.dizziness) dizziness = true; else dizziness = false;
+    // if() dizziness = true; else dizziness = false;
+    dizziness = req.body.hasOwnProperty("dizziness");
     if(req.body.tasteLoss) tasteLoss = true; else tasteLoss = false;
     if(req.body.breatheDifficulty) breatheDifficulty = true; else breatheDifficulty = false;
     if(req.body.chestPain) chestPain = true; else chestPain = false;
     if(req.body.quickTiring) quickTiring = true; else quickTiring = false;
-    let options = tools.registerDailySymptoms({ email: req.session.user.email, date: req.body.date, symptoms: 
+    console.log(req.body);
+    console.log(dizziness);
+    console.log(tasteLoss);
+    let options = tools.registerDailySymptoms({ email: req.session.user.email, date: req.body.date, symptoms:
     {
         fever: req.body.fever,
         headache: headache,

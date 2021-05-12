@@ -43,6 +43,22 @@
                     </tbody>
                 </table>
             </div>
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                        <%if(condition == 0){%>
+                            <h4 style='color:green;'>HEALTHY</h4>
+                        <%}%>
+                        <%if(condition == 1){%>
+                            <h4 style='color:yellow;'>IN_RISK</h4>
+                        <%}%>
+                        <%if(condition == 2){%>
+                            <h4 style='color:orange;'>EARLY_COVID</h4>
+                        <%}%>
+                        <%if(condition == 3){%>
+                            <h4 style='color:red;'>SEVERE</h4>
+                        <%}%>
+                </div>
+            </div>
 <!--            "fever": 36.8,-->
 <!--            "coughing": 1,-->
 <!--            "headache": 0,-->
@@ -55,7 +71,7 @@
             <div class="row mt-5">
                 <div class="col-md-6 offset-md-3">
                     <h3>Submit Daily Symptoms</h3>
-                    <form action="/home" method="post" onsubmit="">
+                    <form action="/home" method="post">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="dizziness">
                             <label class="form-check-label" for="flexCheckDefault">
