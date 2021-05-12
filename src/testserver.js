@@ -1,4 +1,5 @@
 const http = require('http');
+const fs = require('fs');
 const express = require('express');
 const tools = require('./tools');
 
@@ -9,17 +10,20 @@ app.use(express.json())
 const hostname = '127.0.0.0';
 const port = 3002; //test server port
 
+const users_file = 'users.json';
+const users = JSON.parse(fs.readFileSync(users_file));
+
 //signin function testing route
 app.post('/test/signin', function (req, res)
 {
-    let result = tools.signin(req.email, req.password);
+    let result = tools.signin(req.body.email, req.body.password);
     res.send({result: result});
 });
 
 //signup function testing route
 app.post('/test/signup', function (req, res)
 {
-    let result = tools.signup(req.email, req.password, req.name, req.age, req.gender);
+    let result = tools.signup(req.body.email, req.body.phone, req.body.password, req.body.name, req.body.age, req.body.gender);
     res.send({result: result});
 });
 
