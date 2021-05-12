@@ -103,9 +103,6 @@ app.post('/home', function (req, res)
     if(req.body.breatheDifficulty) breatheDifficulty = true; else breatheDifficulty = false;
     if(req.body.chestPain) chestPain = true; else chestPain = false;
     if(req.body.quickTiring) quickTiring = true; else quickTiring = false;
-    console.log(req.body);
-    console.log(dizziness);
-    console.log(tasteLoss);
     let options = tools.registerDailySymptoms({ email: req.session.user.email, date: req.body.date, symptoms:
     {
         fever: req.body.fever,

@@ -72,8 +72,7 @@ module.exports =
     checkCondition: function (user) 
     {
         const condition = Object.freeze({"HEALTHY":0, "IN_RISK":1, "EARLY_COVID":2, "SEVERE":3}); //Condition enum
-        let lastRecord = user.data[user.data.length - 1];
-
+        let lastRecord = user.data[user.data.length - 1].symptoms;
         if(lastRecord["chestPain"] || lastRecord["breatheDifficulty"]){
             return condition.SEVERE;
         }

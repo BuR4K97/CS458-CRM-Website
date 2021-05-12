@@ -7,8 +7,9 @@
     </head>
     <body>
         <div class="row mb-5">
-            <div class="col-md-9 offset-md-3">
-                <h2>Welcome <%=user.email%></h2>
+            <div class="col-md-6 offset-md-3 d-flex">
+                <h2>Welcome <%=user.email.substring(0, user.email.indexOf("@"))%></h2>
+                <a href="/logout" class="btn btn-primary" style="margin-left: auto;">Logout</a>
             </div>
         </div>
         <div class="row mb-5">
@@ -44,7 +45,7 @@
                 </table>
             </div>
             <div class="row">
-                <div class="col-md-6 offset-md-3">
+                <div class="col-md-6 offset-md-3" style="background-color: lightgray;">
                         <%if(condition == 0){%>
                             <h4 style='color:green;'>HEALTHY</h4>
                         <%}%>
