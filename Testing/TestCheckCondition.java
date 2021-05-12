@@ -23,7 +23,8 @@ public class TestCheckCondition {
     @Test
     public void healty(){
         Tools.registerDailySymptoms(dailySymptoms);
-        assertEquals(Condition.HEALTHY, Tools.checkCondition(user));
+        ConditionResult result = Tools.checkCondition(user);
+        assertEquals(Condition.HEALTHY, result.condition);
     }
 
     @Test

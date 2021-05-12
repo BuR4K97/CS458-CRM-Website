@@ -61,10 +61,18 @@ public class JSONHandler
         return new Result( (boolean) json.get("result"), (String) json.get("message"));
     }
 
-    public static Condition extractCondition(String text)
+    public static ConditionResult extractConditionResult(String text)
     {
         JSONObject json = JSONHandler.parse(text);
-        return Condition.values()[Integer.parseInt(json.get("condition").toString())];
+        int condition = Integer.parseInt(json.get("condition").toString());
+        if(json.containsKey("message")) 
+        {
+            return new ConditionResult().setMessage(json.get("message").toString());
+        }
+        else 
+        {
+            return new ConditionResult().setCondition(Condition.values()[condition]);
+        }
     }
 
     private static JSONParser parser = new JSONParser();

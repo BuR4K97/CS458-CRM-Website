@@ -59,13 +59,13 @@ public class Tools
         return null;
     }
 
-    public static Condition checkCondition(User user)
+    public static ConditionResult checkCondition(User user)
     {
         try 
         {
             HTTPConnection connection = new HTTPConnection(SERVER_URL + CHECK_CONDITION_ROUTE);
             String result = connection.sendRequest(JSONHandler.generateJSON(user));
-            return JSONHandler.extractCondition(result);
+            return JSONHandler.extractConditionResult(result);
         } 
         catch (IOException exception) 
         {
