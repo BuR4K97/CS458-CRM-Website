@@ -66,14 +66,14 @@ app.post('/login', function (req, res)
 //Signup POST
 app.post('/signup', function (req, res)
 {
-    const GENDER =
+    const Gender =
     {
         MALE: 0,
         FEMALE: 1
     }
 
-    if(req.body.gender === 'Male') req.body.gender = GENDER.MALE;
-    else req.body.gender = GENDER.FEMALE;
+    if(req.body.gender === 'Male') req.body.gender = Gender.MALE;
+    else req.body.gender = Gender.FEMALE;
 
     var options = tools.signup(req.body);
     if(options.user) 
@@ -87,7 +87,32 @@ app.post('/signup', function (req, res)
 //Home POST
 app.post('/home', function (req, res)
 {
-    console.log(req.body);
+    const Headache = { NONE: 0, MILD: 1, SEVERE: 2 };
+    const Coughing = { NONE: 0, MILD: 1, SEVERE: 2 };
+
+    var headache, coughing, dizziness, tasteLoss, breatheDifficulty, chestPain, quickTiring;
+    if(req.body.headache === "None") headache = Headache.NONE;
+    if(req.body.headache === "Mild") headache = Headache.MILD;
+    if(req.body.headache === "Severe") headache = Headache.SEVERE;
+    if(req.body.coughing === "None") coughing = Coughing.NONE;
+    if(req.body.coughing === "Mild") coughing = Coughing.MILD;
+    if(req.body.coughing === "Severe") coughing = Coughing.SEVERE;
+    if(req.body.dizziness) dizziness = true; else dizziness = false;
+    if(req.body.tasteLoss) tasteLoss = true; else tasteLoss = false;
+    if(req.body.breatheDifficulty) breatheDifficulty = true; else breatheDifficulty = false;
+    if(req.body.chestPain) chestPain = true; else chestPain = false;
+    if(req.body.quickTiring) quickTiring = true; else quickTiring = false;
+    let options = tools.registerDailySymptoms({ email: req.session.user.email, date: req.body.date, symptoms: 
+    {
+        fever: req.body.fever,
+        headache: headache,
+        coughing: coughing,
+        dizziness: dizziness,
+        tasteLoss: tasteLoss,
+        breatheDifficulty: breatheDifficulty,
+        chestPain: chestPain,
+        quickTiring: quickTiring,
+    }});
     let condition = tools.checkCondition(req.session.user);
     res.render('home', { user: req.session.user, condition: condition });
 });
