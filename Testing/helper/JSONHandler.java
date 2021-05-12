@@ -27,10 +27,10 @@ public class JSONHandler
         symptomsJSON.put("coughing", symptoms.coughing.ordinal());
         symptomsJSON.put("headache", symptoms.headache.ordinal());
         symptomsJSON.put("dizziness", symptoms.dizziness);
-        symptomsJSON.put("taste-loss", symptoms.tasteLoss);
-        symptomsJSON.put("breathe-difficulty", symptoms.breatheDifficulty);
-        symptomsJSON.put("chest-pain", symptoms.chestPain);
-        symptomsJSON.put("quick-tiring", symptoms.quickTiring);
+        symptomsJSON.put("tasteLoss", symptoms.tasteLoss);
+        symptomsJSON.put("breatheDifficulty", symptoms.breatheDifficulty);
+        symptomsJSON.put("chestPain", symptoms.chestPain);
+        symptomsJSON.put("quickTiring", symptoms.quickTiring);
 
         JSONObject dailySymptomsJSON = new JSONObject();
         dailySymptomsJSON.put("email", dailySymptoms.user.getEmail());
