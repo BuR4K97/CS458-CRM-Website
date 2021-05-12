@@ -57,14 +57,14 @@
         </style>
     </head>
     <body>
-        <h1><a href="/" id="homebutton">NETFLIX</a> </h1>
+        <h1><a href="/" id="homebutton">Covid Monitoring System</a> </h1>
         <div class="column side"></div>
             <div class="column middle">
                 <h2 style="color:white">Sign In</h2>
                 <form action="/login" method="post" onsubmit="return checkSubmitError();">
                     <div id="loginError" style="color:#939393" class="loginError"><%if(locals.alert)%><%=locals.message%></div>
                     <div id="emailForm">
-                        <input id="email" class="text-input" style="width: 100%" name="email" type= "text" placeholder= "E-mail or phone number" onfocusout="emailFocusOut()">
+                        <input id="email" class="text-input" style="width: 100%" name="email" type= "text" placeholder= "E-mail" onfocusout="emailFocusOut()">
                         <div id="emailError" style="color:#939393" class="inputError" hidden></div>
                     </div>
                     <div id="passForm">
@@ -78,7 +78,7 @@
                 </form>
 
                 <p style="font-size:12px;text-align:right"><a id="forgotpasswordLink" style="color:white" href="/resetpass">Forgot Password</a><p>
-                <p style="color:#939393;font-size:16px;text-align:left">Do you want to join Netflix? <a id="signupLink" style="color:white" href="/signup">Sign Up Now</a></p>
+                <p style="color:#939393;font-size:16px;text-align:left">Do you want to sign-up?<a id="signupLink" style="color:white" href="/signup">Sign Up Here</a></p>
             </div>
             <div class="column side"></div>
 
@@ -99,15 +99,15 @@
             {
                 if (document.getElementById("email").value.length == 0)
                 {
-                    document.getElementById("emailError").innerText = "Please enter a valid e-mail or password.";
+                    document.getElementById("emailError").innerText = "Please enter a valid e-mail.";
                     return false;
                 }
-                else if (document.getElementById("email").value.length < 5 || document.getElementById("email").value.length > 50)
-                {
-                    if (emailOrPhone(document.getElementById("email").value)) document.getElementById("emailError").innerText = "Please enter a valid e-mail.";
-                    else document.getElementById("emailError").innerText = "Please enter a valid phone number.";
-                    return false;
-                }
+                // else if (document.getElementById("email").value.length < 5 || document.getElementById("email").value.length > 50)
+                // {
+                //     if (emailOrPhone(document.getElementById("email").value)) document.getElementById("emailError").innerText = "Please enter a valid e-mail.";
+                //     else document.getElementById("emailError").innerText = "Please enter a valid phone number.";
+                //     return false;
+                // }
                 else
                 {
                     document.getElementById("emailError").innerText = "";

@@ -1,8 +1,148 @@
 <html>
     <head>
-        <title>Netflix</title>
+        <title>Covid Monitoring System</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+        <style>
+        </style>
     </head>
     <body>
-        <h1>Login Successful. Welcome <%=email%></h1>
+        <div class="row mb-5">
+            <div class="col-md-9 offset-md-3">
+                <h2>Welcome <%=email%></h2>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-md-6 offset-md-3">
+                <h3>Past Records</h3>
+                <table class="table table-striped">
+                    <colgroup>
+                        <col span="1" style="width: 20%;">
+                        <col span="1" style="width: 80%;">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Symptoms</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">30.12.2020</th>
+                        <td>Mark</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">31.12.2020</th>
+                        <td>Jacob</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">1.1.20201</th>
+                        <td>Larry the Bird</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+<!--            "fever": 36.8,-->
+<!--            "coughing": 1,-->
+<!--            "headache": 0,-->
+<!--            "dizziness": false,-->
+<!--            "taste-loss": false,-->
+<!--            "breathe-difficulty": false,-->
+<!--            "chest-pain": false,-->
+<!--            "quick-tiring": false-->
+
+            <div class="row mt-5">
+                <div class="col-md-6 offset-md-3">
+                    <h3>Submit Daily Symptoms</h3>
+                    <form action="/home" method="post" onsubmit="return checkSubmitError();">
+                        <div id="signupError" style="color:#939393" class="signupError"><%if(locals.alert)%><%=locals.message%></div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="dizziness">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Dizziness
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="lossOfTaste">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Loss of taste
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="shortnessOfBreath">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Shortness of breath
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Chest pain
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Tiredness
+                            </label>
+                        </div>
+
+                        <label for="fever">Fever: </label>
+                        <input id="fever" name="fever"type="number" placeholder="° Celcius"/>
+
+                        <div id="headache">
+                            <h5>Headache</h5>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="headache" id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    None
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="headache" id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Mild
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="headache" id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Severe
+                                </label>
+                            </div>
+                        </div>
+                        <div id="coughing">
+                            <h5>Coughing</h5>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="coughing" id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    None
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="coughing" id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Mild
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="coughing" id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Severe
+                                </label>
+                            </div>
+                        </div>
+
+                        <label class="mt-2" for="date">Date:</label>
+                        <input type="date" id="date" name="date" class="mb-3">
+                        <br>
+                        <input type="submit" class="button" value="Submit Data">
+                    </form>
+                </div>
+            </div>
+<!--            <div class="offset-md-3"></div>-->
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
     </body>
 </html>
