@@ -26,18 +26,20 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">30.12.2020</th>
-                        <td>Mark</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">31.12.2020</th>
-                        <td>Jacob</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1.1.20201</th>
-                        <td>Larry the Bird</td>
-                    </tr>
+                    <% for(i = 0; i < data.length; i++) { %>
+                        <h2></h2>
+                        <tr>
+                            <th scope="row"><%= data[i].Date %></th>
+                            <td>
+                            <% for(let key in data[i].Symptoms) { %>
+                                <%= key === "fever" ? key + ": " + data[i].Symptoms[key] + ", " : ""%>
+                                <%= data[i].Symptoms[key] === 1 ? key + ": Mild, " : ""%>
+                                <%= data[i].Symptoms[key] === 2 ? key + ": Severe, " : ""%>
+                                <%= data[i].Symptoms[key] === true ? key + ", " : ""%>
+                            <% } %>
+                            </td>
+                        </tr>
+                    <% } %>
                     </tbody>
                 </table>
             </div>
@@ -140,7 +142,6 @@
                     </form>
                 </div>
             </div>
-<!--            <div class="offset-md-3"></div>-->
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
