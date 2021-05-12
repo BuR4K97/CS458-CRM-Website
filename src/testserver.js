@@ -23,7 +23,7 @@ app.post('/test/signin', function (req, res)
 //signup function testing route
 app.post('/test/signup', function (req, res)
 {
-    let result = tools.signup(req.body.email, req.body.phone, req.body.password, req.body.name, req.body.age, req.body.gender);
+    let result = tools.signup(req.body.email, req.body.password, req.body.name, req.body.age, req.body.gender);
     res.send(result);
 });
 

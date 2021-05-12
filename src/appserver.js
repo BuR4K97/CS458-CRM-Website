@@ -29,7 +29,7 @@ app.get('/signup', function (req, res)
 app.post('/signup', function (req, res)
 {
 
-    var options = tools.signup(req.body.email, req.body.phone, req.body.password, req.body.name, req.body.age, req.body.gender);
+    var options = tools.signup(req.body.email, req.body.password, req.body.name, req.body.age, req.body.gender);
 
     if( options.message === undefined)
         res.render('home', options);

@@ -90,24 +90,13 @@
                 pass.setAttribute('type', pass.getAttribute('type') === 'password' ? 'text' : 'password');
             }
 
-            function emailOrPhone(input)
-            {
-                return /[^\d.+()]+/.test(input);
-            }
-
             function checkEmailError()
             {
-                if (document.getElementById("email").value.length == 0)
+                if (document.getElementById("email").value.length === 0)
                 {
-                    document.getElementById("emailError").innerText = "Please enter a valid e-mail.";
+                    document.getElementById("emailError").innerText = "Please enter a valid e-mail or password.";
                     return false;
                 }
-                // else if (document.getElementById("email").value.length < 5 || document.getElementById("email").value.length > 50)
-                // {
-                //     if (emailOrPhone(document.getElementById("email").value)) document.getElementById("emailError").innerText = "Please enter a valid e-mail.";
-                //     else document.getElementById("emailError").innerText = "Please enter a valid phone number.";
-                //     return false;
-                // }
                 else
                 {
                     document.getElementById("emailError").innerText = "";

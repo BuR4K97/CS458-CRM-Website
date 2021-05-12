@@ -16,19 +16,19 @@ public class Tools
     private static final String REGISTER_SYMPTOMS_ROUTE = "/test/registerSymptoms";
     private static final String CHECK_CONDITION_ROUTE = "/test/checkCondition";
 
-    public static boolean signin(User user) 
+    public static JSONObject signin(User user)
     {
         try 
         {
             HTTPConnection connection = new HTTPConnection(SERVER_URL + SIGNIN_ROUTE);
             String result = connection.sendRequest(JSONHandler.generateJSON(user));
-            return JSONHandler.extractResult(result);
+            return JSONHandler.parse(result);
         } 
         catch (IOException exception) 
         {
             exception.printStackTrace();
         }
-        return false;
+        return null;
     }
 
     public static JSONObject signup(User user)

@@ -16,7 +16,6 @@ public class JSONHandler
     {
         JSONObject userJSON = new JSONObject();
         userJSON.put("email", user.getEmail());
-        userJSON.put("phone", user.getPhone());
         userJSON.put("password", user.getPassword());
         userJSON.put("name", user.getName());
         userJSON.put("age", user.getAge());
