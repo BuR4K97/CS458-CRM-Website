@@ -21,7 +21,7 @@ public class JSONHandler
 
     public static String generateJSON(DailySymptoms dailySymptoms) 
     {
-        Symptoms symptoms = dailySymptoms.symptoms;
+        Symptoms symptoms = dailySymptoms.getSymptoms();
         JSONObject symptomsJSON = new JSONObject();
         symptomsJSON.put("fever", symptoms.fever);
         symptomsJSON.put("coughing", symptoms.coughing.ordinal());
@@ -33,8 +33,8 @@ public class JSONHandler
         symptomsJSON.put("quickTiring", symptoms.quickTiring);
 
         JSONObject dailySymptomsJSON = new JSONObject();
-        dailySymptomsJSON.put("email", dailySymptoms.user.getEmail());
-        dailySymptomsJSON.put("date", dailySymptoms.date.toString());
+        dailySymptomsJSON.put("email", dailySymptoms.getUser().getEmail());
+        dailySymptomsJSON.put("date", dailySymptoms.getDate().toString());
         dailySymptomsJSON.put("symptoms", symptomsJSON);
         return dailySymptomsJSON.toJSONString();
     }

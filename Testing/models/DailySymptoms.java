@@ -4,9 +4,9 @@ import java.time.LocalDate;
 
 public class DailySymptoms 
 {
-    public User user;
-    public LocalDate date;
-    public Symptoms symptoms;
+    private User user;
+    private LocalDate date;
+    private Symptoms symptoms;
 
     public DailySymptoms(User user, LocalDate date, Symptoms symptoms) {
         this.user = user;
@@ -32,4 +32,15 @@ public class DailySymptoms
         return this;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public Symptoms getSymptoms() {
+        return symptoms;
+    }
 }

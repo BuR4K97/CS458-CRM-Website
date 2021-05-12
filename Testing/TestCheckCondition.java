@@ -15,16 +15,16 @@ public class TestCheckCondition {
     @Before
     public void init(){
         user = new User("kenneth@gmail.com", "329129293", "Kenneth K", 28, Gender.MALE);
-        dailySymptoms = new DailySymptoms(user, LocalDate.now(), new Symptoms(36.5f, Coughing.LOW, Headache.NONE,
-                false, false, false, false, false));
+        symptoms = new Symptoms(36.5f, Coughing.NONE, Headache.NONE,
+                false, false, false, false, false);
+        dailySymptoms = new DailySymptoms(user, LocalDate.now(),symptoms );
         Tools.login(user);
     }
 
     @Test
     public void healty(){
         Tools.registerDailySymptoms(dailySymptoms);
-        ConditionResult result = Tools.checkCondition(user);
-        assertEquals(Condition.HEALTHY, result.condition);
+        assertEquals(Condition.HEALTHY, Tools.checkCondition(user).getCondition());
     }
 
     @Test
@@ -32,7 +32,7 @@ public class TestCheckCondition {
         symptoms.setChestPain(true);
         dailySymptoms.setSymptoms(symptoms);
         Tools.registerDailySymptoms(dailySymptoms);
-        assertEquals(Condition.SEVERE, Tools.checkCondition(user));
+        assertEquals(Condition.SEVERE, Tools.checkCondition(user).getCondition());
     }
 
     @Test
@@ -41,7 +41,7 @@ public class TestCheckCondition {
         symptoms.setBreatheDifficulty(true);
         dailySymptoms.setSymptoms(symptoms);
         Tools.registerDailySymptoms(dailySymptoms);
-        assertEquals(Condition.SEVERE, Tools.checkCondition(user));
+        assertEquals(Condition.SEVERE, Tools.checkCondition(user).getCondition());
     }
 
     @Test
@@ -50,7 +50,7 @@ public class TestCheckCondition {
         symptoms.setDizziness(true);
         dailySymptoms.setSymptoms(symptoms);
         Tools.registerDailySymptoms(dailySymptoms);
-        assertEquals(Condition.EARLY_COVID, Tools.checkCondition(user));
+        assertEquals(Condition.EARLY_COVID, Tools.checkCondition(user).getCondition());
     }
 
     @Test
@@ -59,7 +59,7 @@ public class TestCheckCondition {
         symptoms.setTasteLoss(true);
         dailySymptoms.setSymptoms(symptoms);
         Tools.registerDailySymptoms(dailySymptoms);
-        assertEquals(Condition.EARLY_COVID, Tools.checkCondition(user));
+        assertEquals(Condition.EARLY_COVID, Tools.checkCondition(user).getCondition());
     }
 
     @Test
@@ -68,7 +68,7 @@ public class TestCheckCondition {
         symptoms.setHeadache(Headache.LOW);
         dailySymptoms.setSymptoms(symptoms);
         Tools.registerDailySymptoms(dailySymptoms);
-        assertEquals(Condition.EARLY_COVID, Tools.checkCondition(user));
+        assertEquals(Condition.EARLY_COVID, Tools.checkCondition(user).getCondition());
     }
 
     @Test
@@ -76,7 +76,7 @@ public class TestCheckCondition {
         symptoms.setHeadache(Headache.HIGH);
         dailySymptoms.setSymptoms(symptoms);
         Tools.registerDailySymptoms(dailySymptoms);
-        assertEquals(Condition.EARLY_COVID, Tools.checkCondition(user));
+        assertEquals(Condition.EARLY_COVID, Tools.checkCondition(user).getCondition());
     }
 
     @Test
@@ -85,7 +85,7 @@ public class TestCheckCondition {
         symptoms.setFever(38.0f);
         dailySymptoms.setSymptoms(symptoms);
         Tools.registerDailySymptoms(dailySymptoms);
-        assertEquals(Condition.IN_RISK, Tools.checkCondition(user));
+        assertEquals(Condition.IN_RISK, Tools.checkCondition(user).getCondition());
     }
 
     @Test
@@ -94,7 +94,7 @@ public class TestCheckCondition {
         symptoms.setCoughing(Coughing.LOW);
         dailySymptoms.setSymptoms(symptoms);
         Tools.registerDailySymptoms(dailySymptoms);
-        assertEquals(Condition.IN_RISK, Tools.checkCondition(user));
+        assertEquals(Condition.IN_RISK, Tools.checkCondition(user).getCondition());
     }
 
     @Test
@@ -102,7 +102,7 @@ public class TestCheckCondition {
         symptoms.setCoughing(Coughing.HIGH);
         dailySymptoms.setSymptoms(symptoms);
         Tools.registerDailySymptoms(dailySymptoms);
-        assertEquals(Condition.IN_RISK, Tools.checkCondition(user));
+        assertEquals(Condition.IN_RISK, Tools.checkCondition(user).getCondition());
     }
 
     @Test
@@ -111,7 +111,7 @@ public class TestCheckCondition {
         symptoms.setQuickTiring(true);
         dailySymptoms.setSymptoms(symptoms);
         Tools.registerDailySymptoms(dailySymptoms);
-        assertEquals(Condition.IN_RISK, Tools.checkCondition(user));
+        assertEquals(Condition.IN_RISK, Tools.checkCondition(user).getCondition());
     }
 
 

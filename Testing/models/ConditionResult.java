@@ -2,10 +2,18 @@ package models;
 
 public class ConditionResult 
 {
-    public Condition condition;
-    public String message;
+    private Condition condition;
+    private String message;
 
-    public ConditionResult setCondition(Condition condition) 
+    public Condition getCondition() {
+        return condition;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public ConditionResult setCondition(Condition condition)
     {
         this.condition = condition;
         return this;
