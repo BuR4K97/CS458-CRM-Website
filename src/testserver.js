@@ -38,7 +38,7 @@ app.post('/registerDailySymptoms', function (req, res)
 app.post('/checkCondition', function (req, res)
 {
     let condition = tools.checkCondition(req.body);
-    res.send({condition: 0});
+    res.send(condition);
 });
 
 app.listen(port, () => 

@@ -1,15 +1,9 @@
 package helper;
 
+import models.*;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
-import models.Condition;
-import models.DailySymptoms;
-import models.Gender;
-import models.Symptoms;
-import models.User;
-import models.UserResult;
 
 public class JSONHandler 
 {
@@ -61,13 +55,13 @@ public class JSONHandler
         return result;
     }
 
-    public static boolean extractResult(String text) 
+    public static Result extractResult(String text)
     {
         JSONObject json = JSONHandler.parse(text);
-        return Boolean.parseBoolean(json.get("result").toString());
+        return new Result( (boolean) json.get("result"), (String) json.get("message"));
     }
 
-    public static Condition extractCondition(String text) 
+    public static Condition extractCondition(String text)
     {
         JSONObject json = JSONHandler.parse(text);
         return Condition.values()[Integer.parseInt(json.get("condition").toString())];

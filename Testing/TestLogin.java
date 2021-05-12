@@ -1,6 +1,6 @@
 import models.Gender;
 import models.User;
-import org.json.simple.JSONObject;
+import models.UserResult;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,10 +23,10 @@ public class TestLogin {
         user.setEmail("burak@gmail.com");
         user.setPassword("123456");
 
-        JSONObject json = Tools.signin(user);
+        UserResult result = Tools.login(user);
 
-        assertTrue(json.containsKey("email"));
-        assertEquals(user.getEmail(), json.get("email"));
+        assertEquals(user.getEmail(), result.getUser().getEmail());
+        assertEquals("Successful Login", result.getMessage());
     }
 
     @Test
@@ -34,10 +34,10 @@ public class TestLogin {
         user.setEmail("burak@gmail.com");
         user.setPassword("999");
 
-        JSONObject json = Tools.signin(user);
+        UserResult result = Tools.login(user);
 
-        assertFalse(json.containsKey("email"));
-        assertEquals("Wrong password. Please try again or reset your password.", json.get("message"));
+        assertNull(result.getUser());
+        assertEquals("Wrong password. Please try again or reset your password.", result.getMessage());
     }
 
     @Test
@@ -45,9 +45,9 @@ public class TestLogin {
         user.setEmail("buraktest@gmail.com");
         user.setPassword("999");
 
-        JSONObject json = Tools.signin(user);
+        UserResult result = Tools.login(user);
 
-        assertFalse(json.containsKey("email"));
-        assertEquals("There is no such account. Please try signing up.", json.get("message"));
+        assertNull(result.getUser());
+        assertEquals("There is no such account. Please try signing up.", result.getMessage());
     }
 }

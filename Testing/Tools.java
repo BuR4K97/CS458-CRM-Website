@@ -1,12 +1,9 @@
-import models.User;
-import models.UserResult;
+import models.*;
 
 import java.io.IOException;
 
 import helper.HTTPConnection;
 import helper.JSONHandler;
-import models.Condition;
-import models.DailySymptoms;
 
 public class Tools 
 {
@@ -38,7 +35,6 @@ public class Tools
         {
             HTTPConnection connection = new HTTPConnection(SERVER_URL + SIGNUP_ROUTE);
             String result = connection.sendRequest(JSONHandler.generateJSON(user));
-            System.out.println(result);
             return JSONHandler.extractUserResult(result);
         } 
         catch (IOException exception) 
@@ -48,7 +44,7 @@ public class Tools
         return null;
     }
 
-    public static boolean registerDailySymptoms(DailySymptoms dailySymptoms) 
+    public static Result registerDailySymptoms(DailySymptoms dailySymptoms)
     {
         try 
         {
@@ -60,10 +56,10 @@ public class Tools
         {
             exception.printStackTrace();
         }
-        return false;
+        return null;
     }
 
-    public static Condition checkCondition(User user) 
+    public static Condition checkCondition(User user)
     {
         try 
         {
